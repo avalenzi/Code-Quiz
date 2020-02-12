@@ -1,4 +1,6 @@
 
+
+
 function Quiz(questions) {
     this.score = 0;
     this.questions = questions;
@@ -91,7 +93,7 @@ var quiz = new Quiz(questions);
 // display quiz
 populate();
 
-// code by webdevtrick (https://webdevtrick.com)
+
 function Quiz(questions) {
     this.score = 0;
     this.questions = questions;
@@ -131,11 +133,11 @@ function populate() {
         showScores();
     }
     else {
-        // show question
+
         var element = document.getElementById("question");
         element.innerHTML = quiz.getQuestionIndex().text;
 
-        // show options
+
         var choices = quiz.getQuestionIndex().choices;
         for (var i = 0; i < choices.length; i++) {
             var element = document.getElementById("choice" + i);
@@ -175,5 +177,22 @@ var questions = [
     new Question("Which language is used for styling web pages?", ["HTML", "JQuery", "CSS", "XML"], "CSS"),
     new Question("Which is not a JavaScript Framework?", ["Python Script", "JQuery", "Django", "NodeJS"], "Django"),
     new Question("Which is used for Connect To Database?", ["PHP", "HTML", "JS", "All"], "PHP"),
-    new Question("Webdevtrick.com is about..", ["Web Design", "Graphic Design", "SEO & Development", "All"], "All")
+
 ];
+
+function highScore(score) {
+    var saved = 0;
+    try { saved = parseFloat(localStorage.highScore); } catch (e) { saved = 0; }
+    if (!(typeof score === 'undefined')) {
+        try { score = parseFloat(score); } catch (e) { score = 0; }
+        if (score > saved) {
+            saved = score;
+            localStorage.highScore = '' + score;
+        }
+    }
+    if (isNaN(saved)) {
+        saved = 0;
+        localStorage.highScore = '0';
+    }
+    return saved;
+}
